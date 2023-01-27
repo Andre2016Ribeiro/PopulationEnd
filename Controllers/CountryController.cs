@@ -11,9 +11,9 @@ namespace PopulationEnd.Controllers
         public async Task<IActionResult> Index()
         {
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("https://population1.azurewebsites.net/");
-           
-            //https://localhost:7066/api/countries/
+            //client.BaseAddress = new Uri("https://localhost:7066/api/countries/");
+
+            client.BaseAddress = new Uri("https://populacaoapi.azurewebsites.net/api/countries");
             var countrie = await client.GetFromJsonAsync<List<Country>>("");
             return View(countrie);
         }
@@ -38,8 +38,8 @@ namespace PopulationEnd.Controllers
             try
             {
                 HttpClient client = new HttpClient();
-                client.BaseAddress = new Uri("https://population1.azurewebsites.net/");
-                //"https://localhost:7066/api/countries/");
+                //client.BaseAddress = new Uri("https://localhost:7066/api/countries/");
+                client.BaseAddress = new Uri("https://populacaoapi.azurewebsites.net/api/countries");
 
                 await client.PostAsJsonAsync<Country>("", collection);
                
