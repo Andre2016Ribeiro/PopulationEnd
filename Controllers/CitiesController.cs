@@ -4,51 +4,51 @@ using System.Net.Http.Json;
 
 namespace PopulationEnd.Controllers
 {
-    public class CountryController : Controller
+    public class CitiesController : Controller
     {
-
-        // GET: CountryController
+        // GET: CitiesController
         public async Task<IActionResult> Index()
         {
             HttpClient client = new HttpClient();
-            //client.BaseAddress = new Uri("https://localhost:7066/api/countries");
+            //client.BaseAddress = new Uri("https://localhost:7066/api/cities");
+            client.BaseAddress = new Uri("https://populacaoapi.azurewebsites.net/api/cities");
 
-            client.BaseAddress = new Uri("https://populacaoapi.azurewebsites.net/api/countries");
-            var countrie = await client.GetFromJsonAsync<List<Country>>("");
-            return View(countrie);
+            var result= await client.GetFromJsonAsync<List<City>>("");
+            
+            return View(result);
         }
 
-        // GET: CountryController/Details/5
+        // GET: CitiesController/Details/5
         public async Task<IActionResult> Details(int id)
         {
             HttpClient client = new HttpClient();
             //client.BaseAddress = new Uri("https://localhost:7066/api/countries/");
+            client.BaseAddress = new Uri("https://populacaoapi.azurewebsites.net/api/cities/");
 
-            client.BaseAddress = new Uri("https://populacaoapi.azurewebsites.net/api/countries/");
-            var countrie = await client.GetFromJsonAsync<Country>(id.ToString());
-            return View(countrie);
+           var result = await client.GetFromJsonAsync<City>(id.ToString());
             
+            
+            return View(result);
         }
 
-        // GET: CountryController/Create
+        // GET: CitiesController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CountryController/Create
+        // POST: CitiesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Country collection)
+        public async Task<IActionResult> Create(City collection)
         {
             try
             {
                 HttpClient client = new HttpClient();
                 //client.BaseAddress = new Uri("https://localhost:7066/api/countries/");
-                client.BaseAddress = new Uri("https://populacaoapi.azurewebsites.net/api/countries/");
+                client.BaseAddress = new Uri("https://populacaoapi.azurewebsites.net/api/cities/");
 
-                await client.PostAsJsonAsync<Country>("", collection);
-               
+                await client.PostAsJsonAsync<City>("", collection);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -57,63 +57,60 @@ namespace PopulationEnd.Controllers
             }
         }
 
-        // GET: CountryController/Edit/5
+        // GET: CitiesController/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
             HttpClient client = new HttpClient();
             //client.BaseAddress = new Uri("https://localhost:7066/api/countries/");
+            client.BaseAddress = new Uri("https://populacaoapi.azurewebsites.net/api/cities/");
 
-            client.BaseAddress = new Uri("https://populacaoapi.azurewebsites.net/api/countries/");
-            var countrie = await client.GetFromJsonAsync<Country>(id.ToString());
-            return View(countrie);
-            
+            var result = await client.GetFromJsonAsync<City>(id.ToString());
+            return View(result);
         }
 
-        // POST: CountryController/Edit/5
+        // POST: CitiesController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Country collection)
+        public async Task<IActionResult> Edit(int id, City collection)
         {
             try
             {
                 HttpClient client = new HttpClient();
                 //client.BaseAddress = new Uri("https://localhost:7066/api/countries/");
-                client.BaseAddress = new Uri("https://populacaoapi.azurewebsites.net/api/countries/");
+                client.BaseAddress = new Uri("https://populacaoapi.azurewebsites.net/api/cities/");
 
-                await client.PutAsJsonAsync<Country>(id.ToString(), collection);
+                await client.PutAsJsonAsync<City>(id.ToString(), collection);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View(collection);
+                return View();
             }
         }
 
-        // GET: CountryController/Delete/5
+        // GET: CitiesController/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
             HttpClient client = new HttpClient();
             //client.BaseAddress = new Uri("https://localhost:7066/api/countries/");
+            client.BaseAddress = new Uri("https://populacaoapi.azurewebsites.net/api/cities/");
 
-            client.BaseAddress = new Uri("https://populacaoapi.azurewebsites.net/api/countries/");
-            var countrie = await client.GetFromJsonAsync<Country>(id.ToString());
-            return View(countrie);
-            
+            var result = await client.GetFromJsonAsync<City>(id.ToString());
+            return View(result);
         }
 
-        // POST: CountryController/Delete/5
+        // POST: CitiesController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int id, Country collection)
+        public async Task<IActionResult> Delete(int id, City collection)
         {
             try
             {
                 HttpClient client = new HttpClient();
                 //client.BaseAddress = new Uri("https://localhost:7066/api/countries/");
-                client.BaseAddress = new Uri("https://populacaoapi.azurewebsites.net/api/countries/");
+                client.BaseAddress = new Uri("https://populacaoapi.azurewebsites.net/api/cities/");
                 await client.DeleteAsync(id.ToString());
                 return RedirectToAction(nameof(Index));
-                
             }
             catch
             {
